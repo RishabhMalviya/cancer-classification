@@ -1,5 +1,5 @@
 pyenv install --skip-existing
-poetry instal
+poetry install
 
 aws s3 mb s3://rishabhmalviya---cancer-classification --region us-west-1
 
