@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/d150dca3a75e452fa85d6da604057cfb/artifacts
+end_time: 1742080046628
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: d150dca3a75e452fa85d6da604057cfb
+run_name: monumental-shark-442
+run_uuid: d150dca3a75e452fa85d6da604057cfb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742080046291
+status: 4
+tags: []
+user_id: ubuntu
