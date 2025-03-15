@@ -19,9 +19,9 @@ class ResNet18__LightningModule(pl.LightningModule):
         self.criterion = nn.CrossEntropyLoss()
 
         # Define metrics
-        self.train_accuracy = torchmetrics.Accuracy()
-        self.val_accuracy = torchmetrics.Accuracy()
-        self.test_accuracy = torchmetrics.Accuracy()
+        self.train_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
+        self.val_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
+        self.test_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
 
     def forward(self, x):
         return self.model(x)
