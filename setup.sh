@@ -21,4 +21,4 @@ pyenv install --skip-existing
 export POETRY_VIRTUALENVS_IN_PROJECT=true && poetry install --all-groups
 
 # Installations for remote SSH development
-sudo apt-get install openssh-server
+sudo apt-get update && sudo apt-get install openssh-server
