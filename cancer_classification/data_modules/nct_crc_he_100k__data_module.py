@@ -11,7 +11,7 @@ from cancer_classification.paths import RAW_DATA_DIR
 
 
 class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
-    def __init__(self, batch_size=64, num_workers=3, split_dir_name='splits'):
+    def __init__(self, batch_size=64, num_workers=3, split_dir_name='../splits'):
         """
         Initialization of inherited lightning data module
         """
