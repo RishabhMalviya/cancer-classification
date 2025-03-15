@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/ec6f8fa04ef44b598c9f4bb785abe79d/artifacts
+end_time: 1742079508563
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: ec6f8fa04ef44b598c9f4bb785abe79d
+run_name: auspicious-goat-828
+run_uuid: ec6f8fa04ef44b598c9f4bb785abe79d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742079508230
+status: 4
+tags: []
+user_id: ubuntu
