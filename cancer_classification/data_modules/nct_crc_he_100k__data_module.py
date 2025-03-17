@@ -131,8 +131,13 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
 
         # Create subsets using the indices
         self.train_set = Subset(self.full_set, train_indices)
+        self.log('train_set_size', len(self.train_set))
+
         self.val_set = Subset(self.full_set, val_indices)
+        self.log('val_set_size', len(self.val_set))
+
         self.test_set = Subset(self.full_set, test_indices)
+        self.log('test_set_size', len(self.test_set))
 
 
     def _create_data_loader(self, data_subset, shuffle=False):
