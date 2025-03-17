@@ -9,7 +9,6 @@ from torchmetrics.classification import (
     MulticlassF1Score,
     MulticlassConfusionMatrix
 )
-from torchmetrics import Pr
 import lightning.pytorch as pl
 
 from torchvision.models import resnet18
@@ -97,7 +96,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             # Log confusion matrix plot to MLflow
             self.log('Confusion Matrix', plt)
             plt.close()
-            
+
         self.log('test_precision', self.precision.compute())
         self.log('test_recall', self.recall.compute())
         self.log('test_f1_score', self.f1_score.compute())
