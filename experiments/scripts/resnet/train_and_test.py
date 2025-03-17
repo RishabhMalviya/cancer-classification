@@ -38,7 +38,7 @@ def _configure_callbacks():
     checkpoint_callback = ModelCheckpointWithCleanupCallback(
         save_top_k=2,
         save_last=True,
-        monitor="val_loss", 
+        monitor="val_loss",
         mode="min",
         verbose=True,
         filename='{epoch}-{val_loss:.2f}'

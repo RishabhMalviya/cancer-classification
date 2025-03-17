@@ -79,17 +79,10 @@ class ResNet18__LightningModule(pl.LightningModule):
             plt.ylabel('True')
             plt.title('Confusion Matrix')
 
-            # Save plot to a buffer
-            buf = io.BytesIO()
-            plt.savefig(buf, format='png')
-            buf.seek(0)
-            plt.close()
-
-            # Convert buffer to PIL image
-            img = Image.open(buf)
-
             # Log confusion matrix plot to the logger
-            self.logger.experiment.log_image("Confusion Matrix", artifact_file=img, image=img)
+            self.logger.experiment.log_figure(plt, "Confusion Matrix.png")
+
+            plt.close()
 
         x, y = batch
         y_hat = self(x)

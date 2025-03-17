@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/d5b19dd11905437db854697b3f7dd022/artifacts
+end_time: 1742225043564
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: d5b19dd11905437db854697b3f7dd022
+run_name: nosy-squid-691
+run_uuid: d5b19dd11905437db854697b3f7dd022
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742224910943
+status: 4
+tags: []
+user_id: ubuntu
