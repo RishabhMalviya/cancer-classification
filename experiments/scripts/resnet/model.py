@@ -15,7 +15,7 @@ from torchvision.models import resnet18
 
 
 class ResNet18__LightningModule(pl.LightningModule):
-    def __init__(self, num_classes=9):
+    def __init__(self, num_classes=9, learning_rate=1e-3):
         super(ResNet18__LightningModule, self).__init__()
         self.save_hyperparameters()
 
