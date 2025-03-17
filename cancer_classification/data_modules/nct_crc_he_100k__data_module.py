@@ -69,40 +69,36 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
 
         :param stage: Stage - training or testing
         """
-        # # Load the dataset with transforms
-        # self.full_set = datasets.ImageFolder(RAW_DATA_DIR, transform=self.transform)
+        # Load the dataset with transforms
+        self.full_set = datasets.ImageFolder(RAW_DATA_DIR, transform=self.transform)
 
-        # # Split by indices or make new split & save indices
-        # indices_exist = [
-        #     os.path.exists(os.path.join(self.split_dir_name, file_name))
-        #     for file_name in [
-        #         self.train_split_file_name,
-        #         self.val_split_file_name,
-        #         self.test_split_file_name
-        #     ]
-        # ]
-        # if all(indices_exist):
-        #     train_indices, val_indices, test_indices = self._load_splits()
-        # else:
-        #     targets = self.full_set.targets
+        # Split by indices or make new split & save indices
+        indices_exist = [
+            os.path.exists(os.path.join(self.split_dir_name, file_name))
+            for file_name in [
+                self.train_split_file_name,
+                self.val_split_file_name,
+                self.test_split_file_name
+            ]
+        ]
+        if all(indices_exist):
+            train_indices, val_indices, test_indices = self._load_splits()
+        else:
+            targets = self.full_set.targets
             
-        #     # Stratified split to ensure class balance
-        #     skf = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
-        #     train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
+            # Stratified split to ensure class balance
+            skf = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
+            train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
 
-        #     skf_val = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
-        #     train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
+            skf_val = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
+            train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
 
-        #     self._save_splits(train_indices, val_indices, test_indices)
+            self._save_splits(train_indices, val_indices, test_indices)
 
-        # # Create subsets using the indices
-        # self.train_set = Subset(self.full_set, train_indices)
-        # self.val_set = Subset(self.full_set, val_indices)
-        # self.test_set = Subset(self.full_set, test_indices)
-
-        self.train_set = Subset(self.full_set, [1,2,3,4,5,6,7,8])
-        self.val_set = Subset(self.full_set, [9])
-        self.test_set = Subset(self.full_set, [10])
+        # Create subsets using the indices
+        self.train_set = Subset(self.full_set, train_indices)
+        self.val_set = Subset(self.full_set, val_indices)
+        self.test_set = Subset(self.full_set, test_indices)
 
 
     def _create_data_loader(self, data_subset, shuffle=False):
