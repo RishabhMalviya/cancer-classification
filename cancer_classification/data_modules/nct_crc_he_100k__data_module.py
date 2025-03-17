@@ -48,8 +48,25 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         os.makedirs(self.split_dir_name, exist_ok=True)
 
         np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), train_indices)
-        np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name  ), val_indices  )
-        np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name ), test_indices )
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id, 
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
+            artifact_path='dataset_splits'
+        )
+
+        np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name), val_indices)
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id,
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
+            artifact_path='dataset_splits'
+        )
+
+        np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name), test_indices)
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id,
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
+            artifact_path='dataset_splits'
+        )
 
 
     def _load_splits(self):
@@ -57,8 +74,25 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         Load the train, validation, and test splits' indices from disk
         """
         train_indices = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name))
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id, 
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
+            artifact_path='dataset_splits'
+        )
+        
         val_indices   = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name  ))
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id,
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
+            artifact_path='dataset_splits'
+        )
+
         test_indices  = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name ))
+        self.logger.experiment.log_artifact(
+            run_id=self.logger.run_id,
+            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
+            artifact_path='dataset_splits'
+        )
 
         return train_indices, val_indices, test_indices
 
