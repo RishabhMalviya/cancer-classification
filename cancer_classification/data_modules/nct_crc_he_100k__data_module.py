@@ -9,7 +9,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, Subset
 
 
-from cancer_classification.paths import RAW_DATA_DIR
+from cancer_classification.utils.paths import RAW_DATA_DIR
 
 
 class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
