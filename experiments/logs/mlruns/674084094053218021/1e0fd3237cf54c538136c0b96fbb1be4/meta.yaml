@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/1e0fd3237cf54c538136c0b96fbb1be4/artifacts
+end_time: 1742232610118
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 1e0fd3237cf54c538136c0b96fbb1be4
+run_name: resilient-crane-259
+run_uuid: 1e0fd3237cf54c538136c0b96fbb1be4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742232248567
+status: 3
+tags: []
+user_id: ubuntu
