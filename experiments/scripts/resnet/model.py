@@ -70,6 +70,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             import seaborn as sns
 
             # Compute confusion matrix
+            self.confusion_matrix.update((y_hat.argmax(dim=1), y))
             cm = self.confusion_matrix.compute().cpu().numpy()
 
             # Plot confusion matrix
@@ -79,12 +80,12 @@ class ResNet18__LightningModule(pl.LightningModule):
             plt.ylabel('True')
             plt.title('Confusion Matrix')
 
-            # Save confusion matrix plot as an image
-            file_path = 'confusion_matrix.png'
-            fig.savefig(file_path)
+            # # Save confusion matrix plot as an image
+            # file_path = 'confusion_matrix.png'
+            # fig.savefig(file_path)
 
             # Log the file path
-            self.logger.experiment.log_figure({"Confusion Matrix": file_path})
+            self.logger.experiment.log_figure(fig, "Confusion Matrix")
 
             plt.close()
 
