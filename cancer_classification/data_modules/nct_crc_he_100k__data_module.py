@@ -58,13 +58,11 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
                 artifact_path='dataset_splits'
             )
-
             self.logger.experiment.log_artifact(
                 run_id=self.logger.run_id,
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
                 artifact_path='dataset_splits'
             )
-
             self.logger.experiment.log_artifact(
                 run_id=self.logger.run_id,
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
@@ -87,13 +85,11 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
                 artifact_path='dataset_splits'
             )
-
             self.logger.experiment.log_artifact(
                 run_id=self.logger.run_id,
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
                 artifact_path='dataset_splits'
             )
-
             self.logger.experiment.log_artifact(
                 run_id=self.logger.run_id,
                 local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
@@ -141,9 +137,9 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         self.test_set = Subset(self.full_set, test_indices)
 
         if self.logger:
-            self.logger.experiment.log_param(key='train_set_size', value=len(self.train_set))
-            self.logger.experiment.log_param(key='val_set_size', value=len(self.val_set))
-            self.logger.experiment.log_param(key='test_set_size', value=len(self.test_set))
+            self.logger.experiment.log_param(run_id=self.logger.run_id, key='train_set_size', value=len(self.train_set))
+            self.logger.experiment.log_param(run_id=self.logger.run_id, key='val_set_size', value=len(self.val_set))
+            self.logger.experiment.log_param(run_id=self.logger.run_id, key='test_set_size', value=len(self.test_set))
 
 
     def _create_data_loader(self, data_subset, shuffle=False):
