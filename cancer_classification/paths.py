@@ -7,9 +7,7 @@ s3_bucket_name = 'rishabhmalviya---cancer-classification'
 
 _curr_dir = os.path.dirname(os.path.abspath(__file__))
 
-RAW_DATA_DIR = os.path.join(_curr_dir, '../data/1_raw/NCT-CRC-HE-100K/')
-INTERMEDIATE_DATA_DIR = os.path.join(_curr_dir, '../data/2_intermediate')
-PROCESSED_DATA_DIR = os.path.join(_curr_dir, '../data/3_processed')
+RAW_DATA_DIR = os.path.join(_curr_dir, '../data/NCT-CRC-HE-100K/')
 
 EXPERIMENT_LOGS_DIR = os.path.join(_curr_dir, '../experiments/logs')
 

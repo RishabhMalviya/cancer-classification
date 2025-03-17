@@ -62,23 +62,6 @@ class ResNet18__LightningModule(pl.LightningModule):
         return loss
 
     def test_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-
-        loss = self.criterion(y_hat, y)
-
-        self.log('test_loss', loss)
-        self.log('test_acc', self.test_accuracy(y_hat, y))
-
-        # Update precision, recall, and f1 metrics
-        self.precision.update(y_hat, y)
-        self.recall.update(y_hat, y)
-        self.f1_score.update(y_hat, y)
-        self.confusion_matrix.update(y_hat, y)
-
-        return loss
-
-    def on_train_end(self):
         def _plot_and_log_confusion_matrix(self):
             import matplotlib.pyplot as plt
             import seaborn as sns
@@ -97,12 +80,23 @@ class ResNet18__LightningModule(pl.LightningModule):
             self.log('Confusion Matrix', plt)
             plt.close()
 
-        self.log('test_precision', self.precision.compute())
-        self.log('test_recall', self.recall.compute())
-        self.log('test_f1_score', self.f1_score.compute())
-        self.log('test_confusion_matrix', self.confusion_matrix.compute())
+        x, y = batch
+        y_hat = self(x)
+
+        loss = self.criterion(y_hat, y)
+
+        self.log('test_loss', loss)
+        self.log('test_acc', self.test_accuracy(y_hat, y))
+
+        # Update precision, recall, and f1 metrics
+        self.log('test_precision', self.precision(y_hat, y))
+        self.log('test_recall', self.recall(y_hat, y))
+        self.log('test_f1_score', self.f1_score(y_hat, y))
 
         self._plot_and_log_confusion_matrix()
+
+        return loss
+
 
     def configure_optimizers(self):
         optimizer = optim.Adam(self.parameters(), lr=self.hparams.learning_rate)
