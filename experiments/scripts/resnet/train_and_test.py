@@ -5,6 +5,8 @@ import warnings
 warnings.filterwarnings("ignore")
 import sys
 
+from datetime import timedelta
+
 from lightning.pytorch import Trainer
 from lightning.pytorch.callbacks import (
     RichProgressBar, EarlyStopping
@@ -13,6 +15,7 @@ from lightning.pytorch.callbacks import (
 from cancer_classification.mlflow_utils import get_lightning_mlflow_logger, ModelCheckpointWithCleanupCallback
 from cancer_classification.paths import get_curr_dir, get_curr_filename
 from cancer_classification.git_utils import check_repo_is_in_sync, commit_latest_run, GitOutOfSyncError
+from cancer_classification.custom_callbacks.timer_with_logging_callback import TimerWithLoggingCallback
 
 from cancer_classification.data_modules.nct_crc_he_100k__data_module import NCT_CRC_HE_100K__DataModule
 from experiments.scripts.resnet.model import ResNet18__LightningModule
@@ -39,9 +42,12 @@ def _configure_callbacks():
         filename='{epoch}-{val_loss:.2f}'
     )
 
+    timer_with_logging_callback = TimerWithLoggingCallback(duration=timedelta(weeks=1), interval='epoch')
+
     return [
         early_stopping_callback,
         checkpoint_callback,
+        timer_with_logging_callback,
         RichProgressBar()
     ]
 
