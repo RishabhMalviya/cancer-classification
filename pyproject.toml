@@ -27,6 +27,8 @@ jsonargparse = {extras = ["signatures"], version = "^4.36.0"}
 # Dev Dependencies
 ########################
 pillow = "^11.1.0"
+matplotlib = "^3.10.1"
+seaborn = "^0.13.2"
 [tool.poetry.group.dev]
 optional = true
 
