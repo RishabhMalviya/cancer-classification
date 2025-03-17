@@ -3,7 +3,7 @@ from datetime import datetime
 
 from mlflow.entities import Run
 
-from cancer_classification.paths import EXPERIMENT_LOGS_DIR
+from cancer_classification.utils.paths import EXPERIMENT_LOGS_DIR
 
 
 class GitOutOfSyncError(Exception):

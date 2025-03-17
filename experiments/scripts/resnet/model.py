@@ -93,7 +93,7 @@ class ResNet18__LightningModule(pl.LightningModule):
         self.log('test_recall', self.recall(y_hat, y))
         self.log('test_f1_score', self.f1_score(y_hat, y))
 
-        self._plot_and_log_confusion_matrix()
+        _plot_and_log_confusion_matrix()
 
         return loss
 

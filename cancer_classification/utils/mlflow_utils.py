@@ -8,7 +8,7 @@ from lightning.pytorch import Trainer, LightningModule
 from lightning.pytorch.callbacks import ModelCheckpoint
 import lightning.pytorch.loggers as pl_loggers
 
-from cancer_classification.paths import EXPERIMENT_LOGS_DIR, s3_bucket_name
+from cancer_classification.utils.paths import EXPERIMENT_LOGS_DIR, s3_bucket_name
 
 
 class ModelCheckpointWithCleanupCallback(ModelCheckpoint):

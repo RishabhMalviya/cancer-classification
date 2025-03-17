@@ -12,12 +12,14 @@ from lightning.pytorch.callbacks import (
     RichProgressBar, EarlyStopping
 )
 
-from cancer_classification.mlflow_utils import get_lightning_mlflow_logger, ModelCheckpointWithCleanupCallback
-from cancer_classification.paths import get_curr_dir, get_curr_filename
-from cancer_classification.git_utils import check_repo_is_in_sync, commit_latest_run, GitOutOfSyncError
+from cancer_classification.utils.mlflow_utils import get_lightning_mlflow_logger, ModelCheckpointWithCleanupCallback
+from cancer_classification.utils.paths import get_curr_dir, get_curr_filename
+from cancer_classification.utils.git_utils import check_repo_is_in_sync, commit_latest_run, GitOutOfSyncError
+
 from cancer_classification.custom_callbacks.timer_with_logging_callback import TimerWithLoggingCallback
 
 from cancer_classification.data_modules.nct_crc_he_100k__data_module import NCT_CRC_HE_100K__DataModule
+
 from experiments.scripts.resnet.model import ResNet18__LightningModule
 
 
