@@ -1,6 +1,4 @@
-import io
-
-from PIL import Image
+import os
 
 import torch.nn as nn
 import torch.optim as optim
@@ -80,12 +78,13 @@ class ResNet18__LightningModule(pl.LightningModule):
             plt.ylabel('True')
             plt.title('Confusion Matrix')
 
-            # # Save confusion matrix plot as an image
-            # file_path = 'confusion_matrix.png'
-            # fig.savefig(file_path)
+            # Save confusion matrix plot as an image
+            file_path = 'confusion_matrix.png'
+            fig.savefig(file_path)
 
             # Log the file path
-            self.logger.experiment.log_figure(fig, "Confusion Matrix")
+            self.logger.experiment.log_artifact("confusion_matrix.png", 'plots')
+            os.remove('confusion_matrix.png')
 
             plt.close()
 
