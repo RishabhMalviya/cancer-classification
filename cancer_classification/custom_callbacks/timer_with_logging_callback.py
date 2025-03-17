@@ -15,3 +15,4 @@ class TimerWithLoggingCallback(Timer):
         pl_module.log('train_time_seconds', curr_epoch_time, prog_bar=True)
 
         self.last_epoch_end = self.time_elapsed('train')
+
