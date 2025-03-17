@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/26eaf8975b8f4afeb0fa698a7285034b/artifacts
+end_time: 1742224811746
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 26eaf8975b8f4afeb0fa698a7285034b
+run_name: lyrical-shoat-632
+run_uuid: 26eaf8975b8f4afeb0fa698a7285034b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742224677877
+status: 4
+tags: []
+user_id: ubuntu
