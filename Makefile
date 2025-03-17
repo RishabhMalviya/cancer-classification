@@ -5,3 +5,6 @@ notebook:
 
 mlflow:
 	cd ./experiments/logs && poetry run mlflow ui
+
+train_resnet:
+	poetry run python ./experiments/scripts/resnet/train_and_test.py
