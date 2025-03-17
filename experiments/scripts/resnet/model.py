@@ -70,7 +70,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             import seaborn as sns
 
             # Compute confusion matrix
-            self.confusion_matrix.update((y_hat.argmax(dim=1), y))
+            self.confusion_matrix.update(y_hat.argmax(dim=1), y)
             cm = self.confusion_matrix.compute().cpu().numpy()
 
             # Plot confusion matrix
