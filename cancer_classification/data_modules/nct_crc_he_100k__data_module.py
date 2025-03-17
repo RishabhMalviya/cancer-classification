@@ -141,9 +141,9 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         self.test_set = Subset(self.full_set, test_indices)
 
         if self.logger:
-            self.logger.experiment.log_param('train_set_size', len(self.train_set))
-            self.logger.experiment.log_param('val_set_size', len(self.val_set))
-            self.logger.experiment.log_param('test_set_size', len(self.test_set))
+            self.logger.experiment.log_param(key='train_set_size', value=len(self.train_set))
+            self.logger.experiment.log_param(key='val_set_size', value=len(self.val_set))
+            self.logger.experiment.log_param(key='test_set_size', value=len(self.test_set))
 
 
     def _create_data_loader(self, data_subset, shuffle=False):
