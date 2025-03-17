@@ -87,10 +87,10 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
             targets = self.full_set.targets
             
             # Stratified split to ensure class balance
-            skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+            skf = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
             train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
 
-            skf_val = StratifiedKFold(n_splits=9, shuffle=True, random_state=42)
+            skf_val = StratifiedKFold(n_splits=2, shuffle=True, random_state=42)
             train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
 
             self._save_splits(train_indices, val_indices, test_indices)

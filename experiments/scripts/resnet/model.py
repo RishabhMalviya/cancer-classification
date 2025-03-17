@@ -1,7 +1,6 @@
 import torch.nn as nn
 import torch.optim as optim
 
-from torchmetrics import Accuracy
 from torchmetrics.classification import (
     MulticlassAccuracy,
     MulticlassPrecision,
@@ -62,7 +61,7 @@ class ResNet18__LightningModule(pl.LightningModule):
         return loss
 
     def test_step(self, batch, batch_idx):
-        def _plot_and_log_confusion_matrix(self):
+        def _plot_and_log_confusion_matrix():
             import matplotlib.pyplot as plt
             import seaborn as sns
 
