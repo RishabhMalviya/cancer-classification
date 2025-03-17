@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/3c047b1cd99e46fb82de042eb9c28949/artifacts
+end_time: 1742202405799
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 3c047b1cd99e46fb82de042eb9c28949
+run_name: righteous-ape-274
+run_uuid: 3c047b1cd99e46fb82de042eb9c28949
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742202175479
+status: 4
+tags: []
+user_id: ubuntu

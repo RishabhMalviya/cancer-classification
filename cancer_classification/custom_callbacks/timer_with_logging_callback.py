@@ -11,4 +11,3 @@ class TimerWithLoggingCallback(Timer):
 
     def on_train_epoch_end(self, trainer, pl_module: LightningModule):
         pl_module.log('train_time', self.time_elapsed('train'), prog_bar=True)
-        pl_module.log('train_time_copliot', trainer.callback_metrics['timer/elapsed_time'], prog_bar=True)
