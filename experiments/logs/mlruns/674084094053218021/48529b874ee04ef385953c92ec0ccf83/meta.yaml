@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/48529b874ee04ef385953c92ec0ccf83/artifacts
+end_time: 1742228726356
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 48529b874ee04ef385953c92ec0ccf83
+run_name: exultant-lark-535
+run_uuid: 48529b874ee04ef385953c92ec0ccf83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742228485678
+status: 4
+tags: []
+user_id: ubuntu
