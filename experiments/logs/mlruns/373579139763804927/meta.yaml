@@ -1,0 +1,6 @@
+artifact_location: /opt/dlami/nvme/cancer-classification/cancer_classification/utils/../../experiments/logs/./mlruns/373579139763804927
+creation_time: 1742229489499
+experiment_id: '373579139763804927'
+last_update_time: 1742229489499
+lifecycle_stage: active
+name: MLFLOW_TEST

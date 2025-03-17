@@ -1,0 +1,15 @@
+artifact_uri: /opt/dlami/nvme/cancer-classification/cancer_classification/utils/../../experiments/logs/./mlruns/373579139763804927/0af8471cacf04cddb43e71b05d6ae42b/artifacts
+end_time: 1742229774000
+entry_point_name: ''
+experiment_id: '373579139763804927'
+lifecycle_stage: active
+run_id: 0af8471cacf04cddb43e71b05d6ae42b
+run_name: beautiful-hound-628
+run_uuid: 0af8471cacf04cddb43e71b05d6ae42b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742229676504
+status: 3
+tags: []
+user_id: ubuntu
