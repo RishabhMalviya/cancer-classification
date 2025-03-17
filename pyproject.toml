@@ -29,6 +29,7 @@ jsonargparse = {extras = ["signatures"], version = "^4.36.0"}
 pillow = "^11.1.0"
 matplotlib = "^3.10.1"
 seaborn = "^0.13.2"
+scikit-learn = "^1.6.1"
 [tool.poetry.group.dev]
 optional = true
 

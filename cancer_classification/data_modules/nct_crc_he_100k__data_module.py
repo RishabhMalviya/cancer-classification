@@ -4,8 +4,10 @@
 import os
 import numpy as np
 import lightning.pytorch as pl
+from sklearn.model_selection import StratifiedKFold
 from torchvision import datasets, transforms
-from torch.utils.data import DataLoader, random_split, Subset
+from torch.utils.data import DataLoader, Subset
+
 
 from cancer_classification.paths import RAW_DATA_DIR
 
@@ -82,11 +84,14 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         if all(indices_exist):
             train_indices, val_indices, test_indices = self._load_splits()
         else:
-            train_size = int(0.8 * len(self.full_set))
-            val_size = int(0.1 * len(self.full_set))
-            test_size = len(self.full_set) - train_size - val_size
+            targets = self.full_set.targets
+            
+            # Stratified split to ensure class balance
+            skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+            train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
 
-            train_indices, val_indices, test_indices = random_split(range(len(self.full_set)), [train_size, val_size, test_size])
+            skf_val = StratifiedKFold(n_splits=9, shuffle=True, random_state=42)
+            train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
 
             self._save_splits(train_indices, val_indices, test_indices)
 
