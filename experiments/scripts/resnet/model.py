@@ -79,8 +79,12 @@ class ResNet18__LightningModule(pl.LightningModule):
             plt.ylabel('True')
             plt.title('Confusion Matrix')
 
-            # Log confusion matrix plot to the logger
-            self.logger.experiment.log_figure(fig, "Confusion Matrix.png")
+            # Save confusion matrix plot as an image
+            file_path = 'confusion_matrix.png'
+            fig.savefig(file_path)
+
+            # Log the file path
+            self.logger.experiment.log({"Confusion Matrix": file_path})
 
             plt.close()
 
