@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/df105d94e33449729bd66dc9247b2dfd/artifacts
+end_time: 1742219090922
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: df105d94e33449729bd66dc9247b2dfd
+run_name: nebulous-turtle-78
+run_uuid: df105d94e33449729bd66dc9247b2dfd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742218951447
+status: 4
+tags: []
+user_id: ubuntu

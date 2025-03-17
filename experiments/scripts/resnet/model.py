@@ -89,7 +89,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             img = Image.open(buf)
 
             # Log confusion matrix plot to the logger
-            self.logger.experiment.log_image(key="Confusion Matrix", artifact_file=img)
+            self.logger.experiment.log_image(key="Confusion Matrix", artifact_file=img, run_id=self.logger.run_id, image=img)
 
         x, y = batch
         y_hat = self(x)
