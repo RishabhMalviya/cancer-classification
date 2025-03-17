@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/85aaee96faee422f8bed3d7d2845a5e9/artifacts
+end_time: 1742234674656
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 85aaee96faee422f8bed3d7d2845a5e9
+run_name: treasured-mole-685
+run_uuid: 85aaee96faee422f8bed3d7d2845a5e9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742233568382
+status: 4
+tags: []
+user_id: ubuntu
