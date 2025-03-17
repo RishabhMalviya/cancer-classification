@@ -29,25 +29,34 @@ class ResNet18__LightningModule(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         x, y = batch
         y_hat = self(x)
+
         loss = self.criterion(y_hat, y)
+
         self.log('train_loss', loss)
         self.log('train_acc', self.train_accuracy(y_hat, y), prog_bar=True)
+
         return loss
 
     def validation_step(self, batch, batch_idx):
         x, y = batch
         y_hat = self(x)
+
         loss = self.criterion(y_hat, y)
+
         self.log('val_loss', loss, prog_bar=True)
         self.log('val_acc', self.val_accuracy(y_hat, y), prog_bar=True)
+
         return loss
 
     def test_step(self, batch, batch_idx):
         x, y = batch
         y_hat = self(x)
+
         loss = self.criterion(y_hat, y)
+
         self.log('test_loss', loss)
         self.log('test_acc', self.test_accuracy(y_hat, y))
+
         return loss
 
     def configure_optimizers(self):
