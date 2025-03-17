@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/3213319217ef412faaf92266a0eaea06/artifacts
+end_time: 1742216508975
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 3213319217ef412faaf92266a0eaea06
+run_name: amusing-shad-886
+run_uuid: 3213319217ef412faaf92266a0eaea06
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742216370067
+status: 4
+tags: []
+user_id: ubuntu
