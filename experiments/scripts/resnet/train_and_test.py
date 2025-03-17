@@ -58,8 +58,8 @@ def _configure_callbacks():
 
 
 def cli_main(_mlflow_logger):
-    model = ResNet18__LightningModule(logger=_mlflow_logger)
-    data_module = NCT_CRC_HE_100K__DataModule()
+    model = ResNet18__LightningModule()
+    data_module = NCT_CRC_HE_100K__DataModule(logger=_mlflow_logger)
 
     trainer = Trainer(
         callbacks=_configure_callbacks(),
