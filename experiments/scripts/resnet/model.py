@@ -84,7 +84,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             fig.savefig(file_path)
 
             # Log the file path
-            self.logger.experiment.log({"Confusion Matrix": file_path})
+            self.logger.experiment.log_figure({"Confusion Matrix": file_path})
 
             plt.close()
 
