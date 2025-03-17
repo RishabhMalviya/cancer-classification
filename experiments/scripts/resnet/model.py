@@ -83,7 +83,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             fig.savefig(file_path)
 
             # Log the file path
-            self.logger.experiment.log_artifact("confusion_matrix.png", 'plots')
+            self.logger.experiment.log_artifact(run_id=self.logger.run_id, local_path="confusion_matrix.png", artifact_path='plots')
             os.remove('confusion_matrix.png')
 
             plt.close()
