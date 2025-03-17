@@ -59,7 +59,7 @@ def cli_main(_mlflow_logger):
     trainer = Trainer(
         callbacks=_configure_callbacks(),
         logger=_mlflow_logger,
-        max_epochs=10
+        max_epochs=1
     )
 
     trainer.fit(model, datamodule=data_module)

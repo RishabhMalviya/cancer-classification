@@ -1,13 +1,22 @@
-import torch
 import torch.nn as nn
 import torch.optim as optim
-import torchmetrics
+
+from torchmetrics import Accuracy
+from torchmetrics.classification import (
+    MulticlassAccuracy,
+    MulticlassPrecision,
+    MulticlassRecall,
+    MulticlassF1Score,
+    MulticlassConfusionMatrix
+)
+from torchmetrics import Pr
 import lightning.pytorch as pl
+
 from torchvision.models import resnet18
 
 
 class ResNet18__LightningModule(pl.LightningModule):
-    def __init__(self, num_classes=9, learning_rate=1e-3):
+    def __init__(self, num_classes=9):
         super(ResNet18__LightningModule, self).__init__()
         self.save_hyperparameters()
 
@@ -19,9 +28,14 @@ class ResNet18__LightningModule(pl.LightningModule):
         self.criterion = nn.CrossEntropyLoss()
 
         # Define metrics
-        self.train_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
-        self.val_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
-        self.test_accuracy = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes)
+        self.train_accuracy = MulticlassAccuracy(num_classes=num_classes)
+        self.val_accuracy = MulticlassAccuracy(num_classes=num_classes)
+        self.test_accuracy = MulticlassAccuracy(num_classes=num_classes)
+
+        self.precision = MulticlassPrecision(num_classes=num_classes)
+        self.recall = MulticlassRecall(num_classes=num_classes)
+        self.f1_score = MulticlassF1Score(num_classes=num_classes)
+        self.confusion_matrix = MulticlassConfusionMatrix(num_classes=num_classes)
 
     def forward(self, x):
         return self.model(x)
@@ -57,7 +71,39 @@ class ResNet18__LightningModule(pl.LightningModule):
         self.log('test_loss', loss)
         self.log('test_acc', self.test_accuracy(y_hat, y))
 
+        # Update precision, recall, and f1 metrics
+        self.precision.update(y_hat, y)
+        self.recall.update(y_hat, y)
+        self.f1_score.update(y_hat, y)
+        self.confusion_matrix.update(y_hat, y)
+
         return loss
+
+    def on_train_end(self):
+        def _plot_and_log_confusion_matrix(self):
+            import matplotlib.pyplot as plt
+            import seaborn as sns
+
+            # Compute confusion matrix
+            cm = self.confusion_matrix.compute()
+
+            # Plot confusion matrix
+            plt.figure(figsize=(10, 8))
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+            plt.xlabel('Predicted')
+            plt.ylabel('True')
+            plt.title('Confusion Matrix')
+
+            # Log confusion matrix plot to MLflow
+            self.log('Confusion Matrix', plt)
+            plt.close()
+            
+        self.log('test_precision', self.precision.compute())
+        self.log('test_recall', self.recall.compute())
+        self.log('test_f1_score', self.f1_score.compute())
+        self.log('test_confusion_matrix', self.confusion_matrix.compute())
+
+        self._plot_and_log_confusion_matrix()
 
     def configure_optimizers(self):
         optimizer = optim.Adam(self.parameters(), lr=self.hparams.learning_rate)
