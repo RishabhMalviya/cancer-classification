@@ -13,11 +13,13 @@ from cancer_classification.utils.paths import RAW_DATA_DIR
 
 
 class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
-    def __init__(self, batch_size=64, num_workers=3, split_dir_name='../splits'):
+    def __init__(self, batch_size=64, num_workers=3, split_dir_name='../splits', logger=None):
         """
         Initialization of inherited lightning data module
         """
         super().__init__()
+
+        self.logger = logger
 
         self.full_set = None
         self.train_set = None
@@ -32,9 +34,8 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         self.val_split_file_name = 'val_indices.npy'
         self.test_split_file_name = 'test_indices.npy'
 
-
         # transforms for images
-        self.transform = transforms.Compose([
+        self.transforms = transforms.Compose([
             transforms.ToTensor(), 
             transforms.RandomHorizontalFlip(),
             transforms.RandomRotation(15)
@@ -48,25 +49,28 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         os.makedirs(self.split_dir_name, exist_ok=True)
 
         np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), train_indices)
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id, 
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
-            artifact_path='dataset_splits'
-        )
-
         np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name), val_indices)
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id,
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
-            artifact_path='dataset_splits'
-        )
-
         np.save(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name), test_indices)
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id,
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
-            artifact_path='dataset_splits'
-        )
+
+        if self.logger:
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id, 
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
+                artifact_path='dataset_splits'
+            )
+
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id,
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
+                artifact_path='dataset_splits'
+            )
+
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id,
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
+                artifact_path='dataset_splits'
+            )
+
 
 
     def _load_splits(self):
@@ -74,25 +78,27 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         Load the train, validation, and test splits' indices from disk
         """
         train_indices = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name))
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id, 
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
-            artifact_path='dataset_splits'
-        )
-        
         val_indices   = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name  ))
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id,
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
-            artifact_path='dataset_splits'
-        )
-
         test_indices  = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name ))
-        self.logger.experiment.log_artifact(
-            run_id=self.logger.run_id,
-            local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
-            artifact_path='dataset_splits'
-        )
+
+        if self.logger:
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id, 
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
+                artifact_path='dataset_splits'
+            )
+
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id,
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
+                artifact_path='dataset_splits'
+            )
+
+            self.logger.experiment.log_artifact(
+                run_id=self.logger.run_id,
+                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
+                artifact_path='dataset_splits'
+            )
 
         return train_indices, val_indices, test_indices
 
@@ -104,7 +110,7 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         :param stage: Stage - training or testing
         """
         # Load the dataset with transforms
-        self.full_set = datasets.ImageFolder(RAW_DATA_DIR, transform=self.transform)
+        self.full_set = datasets.ImageFolder(RAW_DATA_DIR, transform=self.transforms)
 
         # Split by indices or make new split & save indices
         indices_exist = [
@@ -131,13 +137,13 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
 
         # Create subsets using the indices
         self.train_set = Subset(self.full_set, train_indices)
-        self.log('train_set_size', len(self.train_set))
-
         self.val_set = Subset(self.full_set, val_indices)
-        self.log('val_set_size', len(self.val_set))
-
         self.test_set = Subset(self.full_set, test_indices)
-        self.log('test_set_size', len(self.test_set))
+
+        if self.logger:
+            self.logger.experiment.log_param('train_set_size', len(self.train_set))
+            self.logger.experiment.log_param('val_set_size', len(self.val_set))
+            self.logger.experiment.log_param('test_set_size', len(self.test_set))
 
 
     def _create_data_loader(self, data_subset, shuffle=False):

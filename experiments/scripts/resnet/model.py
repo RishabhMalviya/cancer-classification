@@ -58,7 +58,7 @@ class ResNet18__LightningModule(pl.LightningModule):
         loss = self.criterion(y_hat, y)
 
         self.log('val_loss', loss, prog_bar=True)
-        self.log('val_acc', self.val_accuracy(y_hat, y), prog_bar=True)
+        self.log('val_acc', self.val_accuracy(y_hat, y))
 
         return loss
 

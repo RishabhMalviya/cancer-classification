@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/2077e45cf0164c29800cd556fec6ae3a/artifacts
+end_time: 1742235029415
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 2077e45cf0164c29800cd556fec6ae3a
+run_name: adaptable-goose-735
+run_uuid: 2077e45cf0164c29800cd556fec6ae3a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742235029052
+status: 4
+tags: []
+user_id: ubuntu
