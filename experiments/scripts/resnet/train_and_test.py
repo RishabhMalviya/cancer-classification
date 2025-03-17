@@ -1,9 +1,12 @@
 # pylint: disable=arguments-differ
 # pylint: disable=unused-argument
 # pylint: disable=abstract-method
+import os
 import warnings
 warnings.filterwarnings("ignore")
 import sys
+import shutil
+
 
 from datetime import timedelta
 
@@ -74,7 +77,12 @@ if __name__ == "__main__":
     except GitOutOfSyncError as e:
         sys.exit(e)
 
-    mlflow_logger = get_lightning_mlflow_logger(EXPERIMENT_NAME, get_curr_filename(), current_git_hash)
-    cli_main(mlflow_logger)
+    try:
+        mlflow_logger = get_lightning_mlflow_logger(EXPERIMENT_NAME, get_curr_filename(), current_git_hash)
+        cli_main(mlflow_logger)
+        commit_latest_run(EXPERIMENT_NAME, mlflow_logger.experiment.get_run(mlflow_logger._run_id))
+    finally:
+        local_artifacts_dir = os.path.join(get_curr_dir(), '../../../', mlflow_logger.experiment_id)
+        if os.path.exists(local_artifacts_dir):
+            shutil.rmtree(local_artifacts_dir)
 
-    commit_latest_run(EXPERIMENT_NAME, mlflow_logger.experiment.get_run(mlflow_logger._run_id))
