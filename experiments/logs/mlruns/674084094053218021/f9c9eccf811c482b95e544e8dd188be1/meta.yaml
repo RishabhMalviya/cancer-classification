@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/f9c9eccf811c482b95e544e8dd188be1/artifacts
+end_time: 1742206054994
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: f9c9eccf811c482b95e544e8dd188be1
+run_name: charming-bird-834
+run_uuid: f9c9eccf811c482b95e544e8dd188be1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742203708269
+status: 3
+tags: []
+user_id: ubuntu

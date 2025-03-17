@@ -12,7 +12,7 @@ class ResNet18__LightningModule(pl.LightningModule):
         self.save_hyperparameters()
 
         # Define the ResNet model
-        self.model = resnet18(pretrained=True)
+        self.model = resnet18(pretrained=False)
         self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
 
         # Define loss function
