@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/f7cec56700a041e094e82c32c41a8cff/artifacts
+end_time: 1742219713717
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: f7cec56700a041e094e82c32c41a8cff
+run_name: bittersweet-swan-765
+run_uuid: f7cec56700a041e094e82c32c41a8cff
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742219575324
+status: 4
+tags: []
+user_id: ubuntu
