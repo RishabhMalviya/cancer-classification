@@ -73,14 +73,14 @@ class ResNet18__LightningModule(pl.LightningModule):
             cm = self.confusion_matrix.compute().cpu().numpy()
 
             # Plot confusion matrix
-            plt.figure(figsize=(10, 8))
+            fig = plt.figure(figsize=(10, 8))
             sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
             plt.xlabel('Predicted')
             plt.ylabel('True')
             plt.title('Confusion Matrix')
 
             # Log confusion matrix plot to the logger
-            self.logger.experiment.log_figure(plt, "Confusion Matrix.png")
+            self.logger.experiment.log_figure(fig, "Confusion Matrix.png")
 
             plt.close()
 

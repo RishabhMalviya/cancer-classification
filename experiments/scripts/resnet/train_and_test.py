@@ -77,12 +77,7 @@ if __name__ == "__main__":
     except GitOutOfSyncError as e:
         sys.exit(e)
 
-    try:
-        mlflow_logger = get_lightning_mlflow_logger(EXPERIMENT_NAME, get_curr_filename(), current_git_hash)
-        cli_main(mlflow_logger)
-        commit_latest_run(EXPERIMENT_NAME, mlflow_logger.experiment.get_run(mlflow_logger._run_id))
-    finally:
-        local_artifacts_dir = os.path.join(get_curr_dir(), '../../../', mlflow_logger.experiment_id)
-        if os.path.exists(local_artifacts_dir):
-            shutil.rmtree(local_artifacts_dir)
+    mlflow_logger = get_lightning_mlflow_logger(EXPERIMENT_NAME, get_curr_filename(), current_git_hash)
+    cli_main(mlflow_logger)
 
+    commit_latest_run(EXPERIMENT_NAME, mlflow_logger.experiment.get_run(mlflow_logger._run_id))

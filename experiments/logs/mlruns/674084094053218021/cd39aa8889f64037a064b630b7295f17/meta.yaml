@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/cd39aa8889f64037a064b630b7295f17/artifacts
+end_time: 1742227048841
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: cd39aa8889f64037a064b630b7295f17
+run_name: fearless-kit-293
+run_uuid: cd39aa8889f64037a064b630b7295f17
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742226821929
+status: 4
+tags: []
+user_id: ubuntu
