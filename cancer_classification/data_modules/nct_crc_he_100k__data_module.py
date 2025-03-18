@@ -70,35 +70,6 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
             )
 
 
-
-    def _load_splits(self):
-        """
-        Load the train, validation, and test splits' indices from disk
-        """
-        train_indices = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name))
-        val_indices   = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name  ))
-        test_indices  = np.load(os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name ))
-
-        if self.logger:
-            self.logger.experiment.log_artifact(
-                run_id=self.logger.run_id, 
-                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.train_split_file_name), 
-                artifact_path='dataset_splits'
-            )
-            self.logger.experiment.log_artifact(
-                run_id=self.logger.run_id,
-                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.val_split_file_name),
-                artifact_path='dataset_splits'
-            )
-            self.logger.experiment.log_artifact(
-                run_id=self.logger.run_id,
-                local_path=os.path.join(RAW_DATA_DIR, self.split_dir_name, self.test_split_file_name),
-                artifact_path='dataset_splits'
-            )
-
-        return train_indices, val_indices, test_indices
-
-
     def setup(self, stage=None):
         """
         Downloads the data, parse it and split it into train, validation, and test data
@@ -108,28 +79,16 @@ class NCT_CRC_HE_100K__DataModule(pl.LightningDataModule):
         # Load the dataset with transforms
         self.full_set = datasets.ImageFolder(RAW_DATA_DIR, transform=self.transforms)
 
-        # Split by indices or make new split & save indices
-        indices_exist = [
-            os.path.exists(os.path.join(self.split_dir_name, file_name))
-            for file_name in [
-                self.train_split_file_name,
-                self.val_split_file_name,
-                self.test_split_file_name
-            ]
-        ]
-        if all(indices_exist):
-            train_indices, val_indices, test_indices = self._load_splits()
-        else:
-            targets = self.full_set.targets
-            
-            # Stratified split to ensure class balance
-            skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
-            train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
+        # Stratified split to ensure class balance
+        targets = self.full_set.targets
+        
+        skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
+        train_val_indices, test_indices = next(skf.split(np.zeros(len(targets)), targets))
 
-            skf_val = StratifiedKFold(n_splits=9, shuffle=True, random_state=42)
-            train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
+        skf_val = StratifiedKFold(n_splits=9, shuffle=True, random_state=42)
+        train_indices, val_indices = next(skf_val.split(np.zeros(len(train_val_indices)), np.array(targets)[train_val_indices]))
 
-            self._save_splits(train_indices, val_indices, test_indices)
+        self._save_splits(train_indices, val_indices, test_indices)
 
         # Create subsets using the indices
         self.train_set = Subset(self.full_set, train_indices)
