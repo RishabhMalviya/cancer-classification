@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/e002e333140f41d286bde2fd00d3333e/artifacts
+end_time: 1742268490102
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: e002e333140f41d286bde2fd00d3333e
+run_name: amusing-cub-917
+run_uuid: e002e333140f41d286bde2fd00d3333e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742268167438
+status: 4
+tags: []
+user_id: ubuntu

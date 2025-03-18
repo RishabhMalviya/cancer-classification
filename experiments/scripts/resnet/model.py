@@ -46,10 +46,14 @@ class ResNet18__LightningModule(pl.LightningModule):
 
         loss = self.criterion(y_hat, y)
 
-        self.log('train_loss', loss)
-        self.log('train_acc', self.train_accuracy(y_hat, y), prog_bar=True)
+        self.log('train_loss_batch', loss, prog_bar=True)
+        self.train_accuracy.update(y_hat, y)
 
         return loss
+
+    def on_train_epoch_end(self):
+        self.log('train_acc_epoch', self.train_accuracy.compute())
+        self.train_accuracy.reset()
 
     def validation_step(self, batch, batch_idx):
         x, y = batch
@@ -57,10 +61,14 @@ class ResNet18__LightningModule(pl.LightningModule):
 
         loss = self.criterion(y_hat, y)
 
-        self.log('val_loss', loss, prog_bar=True)
-        self.log('val_acc', self.val_accuracy(y_hat, y))
+        self.log('val_loss_batch', loss, prog_bar=True)
+        self.val_accuracy(y_hat, y)
 
         return loss
+    
+    def on_validation_epoch_end(self):
+        self.log('val_acc_epoch', self.val_accuracy.compute())
+        self.val_accuracy.reset()
 
     def test_step(self, batch, batch_idx):
         x, y = batch
