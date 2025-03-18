@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/d2d875505c0548c0868498ba9905f801/artifacts
+end_time: 1742296065740
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: d2d875505c0548c0868498ba9905f801
+run_name: nimble-crane-881
+run_uuid: d2d875505c0548c0868498ba9905f801
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742282952077
+status: 3
+tags: []
+user_id: ubuntu

@@ -133,5 +133,5 @@ class ResNet18__LightningModule(pl.LightningModule):
 
 
     def configure_optimizers(self):
-        optimizer = optim.Adam(self.parameters(), lr=self.hparams.learning_rate)
+        optimizer = optim.Adam(self.parameters(), lr=self.hparams.learning_rate, weight_decay=0.001)
         return optimizer
