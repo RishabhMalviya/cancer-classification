@@ -47,7 +47,7 @@ def _configure_callbacks():
     timer_with_logging_callback = TimerWithLoggingCallback(duration=timedelta(weeks=1), interval='epoch')
 
     return [
-        early_stopping_callback,
+        # early_stopping_callback,
         checkpoint_callback,
         timer_with_logging_callback,
         RichProgressBar()
