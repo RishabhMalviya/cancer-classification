@@ -31,20 +31,20 @@ EXPERIMENT_NAME = get_curr_dir().upper()
 
 def _configure_callbacks():
     early_stopping_callback = EarlyStopping(
-        monitor="val_loss",
+        monitor="val_loss_epoch",
+        min_delta='0.1',
         mode='min',
-        patience=10,
-        stopping_threshold=0.05,
-        divergence_threshold=5.0
+        patience=5,
+        stopping_threshold=0.05
     )
 
     checkpoint_callback = ModelCheckpointWithCleanupCallback(
         save_top_k=2,
         save_last=True,
-        monitor="val_loss",
+        monitor="val_loss_epoch",
         mode="min",
         verbose=True,
-        filename='{epoch}-{val_loss:.2f}'
+        filename='{epoch}-{val_acc_epoch:.2f}'
     )
 
     timer_with_logging_callback = TimerWithLoggingCallback(duration=timedelta(weeks=1), interval='epoch')

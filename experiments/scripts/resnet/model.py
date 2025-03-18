@@ -1,5 +1,6 @@
 import os
 
+import torch
 import torch.nn as nn
 import torch.optim as optim
 
@@ -26,6 +27,8 @@ class ResNet18__LightningModule(pl.LightningModule):
 
         # Define loss function
         self.criterion = nn.CrossEntropyLoss()
+        self.val_loss_outputs = []
+        self.train_loss_outputs = []
 
         # Define metrics
         self.train_accuracy = MulticlassAccuracy(num_classes=num_classes)
@@ -47,11 +50,17 @@ class ResNet18__LightningModule(pl.LightningModule):
         loss = self.criterion(y_hat, y)
 
         self.log('train_loss_batch', loss, prog_bar=True)
+        self.train_loss_outputs.append(loss)
+
         self.train_accuracy.update(y_hat, y)
 
         return loss
 
     def on_train_epoch_end(self):
+        train_loss_epoch = torch.stack(self.train_loss_outputs).mean()
+        self.log('train_loss_epoch', train_loss_epoch)
+        self.train_loss_outputs = []
+
         self.log('train_acc_epoch', self.train_accuracy.compute())
         self.train_accuracy.reset()
 
@@ -61,12 +70,17 @@ class ResNet18__LightningModule(pl.LightningModule):
 
         loss = self.criterion(y_hat, y)
 
-        self.log('val_loss_batch', loss, prog_bar=True)
-        self.val_accuracy(y_hat, y)
+        self.val_loss_outputs.append(loss)
+
+        self.val_accuracy.update(y_hat, y)
 
         return loss
     
     def on_validation_epoch_end(self):
+        val_loss_epoch = torch.stack(self.val_loss_outputs).mean()
+        self.log('val_loss_epoch', val_loss_epoch)
+        self.val_loss_outputs = []
+
         self.log('val_acc_epoch', self.val_accuracy.compute())
         self.val_accuracy.reset()
 
@@ -76,9 +90,7 @@ class ResNet18__LightningModule(pl.LightningModule):
 
         loss = self.criterion(y_hat, y)
 
-        self.log('test_loss', loss)
-        self.log('test_acc', self.test_accuracy(y_hat, y))
-
+        self.test_accuracy.update(y_hat.argmax(dim=1), y)
         self.precision.update(y_hat.argmax(dim=1), y)
         self.recall.update(y_hat.argmax(dim=1), y)
         self.f1_score.update(y_hat.argmax(dim=1), y)
@@ -112,6 +124,7 @@ class ResNet18__LightningModule(pl.LightningModule):
             plt.close()
 
         # Update precision, recall, and f1 metrics
+        self.log('test_accuracy', self.test_accuracy.compute())
         self.log('test_precision', self.precision.compute())
         self.log('test_recall', self.recall.compute())
         self.log('test_f1_score', self.f1_score.compute())

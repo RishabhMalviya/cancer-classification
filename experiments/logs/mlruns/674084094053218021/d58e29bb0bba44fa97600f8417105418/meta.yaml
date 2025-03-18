@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/d58e29bb0bba44fa97600f8417105418/artifacts
+end_time: 1742269059001
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: d58e29bb0bba44fa97600f8417105418
+run_name: learned-asp-671
+run_uuid: d58e29bb0bba44fa97600f8417105418
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742268795807
+status: 4
+tags: []
+user_id: ubuntu
