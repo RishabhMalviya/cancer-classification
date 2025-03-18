@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/81ade5c51f03441592581a4b14278c1e/artifacts
+end_time: 1742271357700
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 81ade5c51f03441592581a4b14278c1e
+run_name: salty-hawk-45
+run_uuid: 81ade5c51f03441592581a4b14278c1e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742271094412
+status: 4
+tags: []
+user_id: ubuntu

@@ -32,7 +32,7 @@ EXPERIMENT_NAME = get_curr_dir().upper()
 def _configure_callbacks():
     early_stopping_callback = EarlyStopping(
         monitor="val_loss_epoch",
-        min_delta='0.1',
+        min_delta=0.1,
         mode='min',
         patience=5,
         stopping_threshold=0.05
