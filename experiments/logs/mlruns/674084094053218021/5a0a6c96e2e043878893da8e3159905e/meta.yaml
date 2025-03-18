@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET/5a0a6c96e2e043878893da8e3159905e/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '674084094053218021'
+lifecycle_stage: active
+run_id: 5a0a6c96e2e043878893da8e3159905e
+run_name: melodic-cub-112
+run_uuid: 5a0a6c96e2e043878893da8e3159905e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742236686019
+status: 1
+tags: []
+user_id: ubuntu
