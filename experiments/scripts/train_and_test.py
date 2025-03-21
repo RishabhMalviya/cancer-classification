@@ -57,7 +57,8 @@ def cli_main(_mlflow_logger):
     # trainer.fit(model, datamodule=data_module)
     # trainer.test(ckpt_path="best", datamodule=data_module)
 
-    LightningCLI(Resnet18__CancerClassification__LightningModule, NCT_CRC_HE_100K__DataModule)
+    from lightning.pytorch.demos.boring_classes import BoringDataModule
+    LightningCLI(Resnet18__CancerClassification__LightningModule, BoringDataModule)
 
 
 if __name__ == "__main__":
