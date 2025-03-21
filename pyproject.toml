@@ -31,6 +31,7 @@ scikit-learn = "^1.6.1"
 ########################
 # Dev Dependencies
 ########################
+typer = "^0.15.2"
 [tool.poetry.group.dev]
 optional = true
 

@@ -1,0 +1,9 @@
+from enum import Enum
+
+import typer
+
+from cancer_classification.lightning_modules.base_cancer_classification_lightning_module import BaseCancerClassificationLightningModule
+from cancer_classification.lightning_modules.resnet18_cancer_classification_lightning_module import Resnet18CancerClassificationLightningModule
+
+class ModelClass(BaseCancerClassificationLightningModule, Enum):
+    resnet18 = Resnet18CancerClassificationLightningModule
