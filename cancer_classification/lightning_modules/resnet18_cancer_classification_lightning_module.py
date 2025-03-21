@@ -21,10 +21,9 @@ from cancer_classification.lightning_modules.base_cancer_classification_lightnin
 
 
 class Resnet18__CancerClassification__LightningModule(Base__CancerClassification__LightningModule):
-    def __init__(self, model=resnet18(pretrained=False)):
+    def __init__(self):
         super(Base__CancerClassification__LightningModule, self).__init__()
-        self.save_hyperparameters()
 
         # Define the ResNet model
-        self.model = model
+        self.model = resnet18(pretrained=False)
         self.model.fc = nn.Linear(self.model.fc.in_features, self.num_classes)
