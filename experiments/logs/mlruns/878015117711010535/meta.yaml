@@ -1,0 +1,6 @@
+artifact_location: s3://rishabhmalviya---cancer-classification/RESNET18/
+creation_time: 1742559244211
+experiment_id: '878015117711010535'
+last_update_time: 1742559244211
+lifecycle_stage: active
+name: RESNET18

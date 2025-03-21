@@ -15,16 +15,19 @@ from cancer_classification.utils.git_utils import check_repo_is_in_sync, commit_
 
 from cancer_classification.custom_callbacks.get_callbacks import get_callbacks
 from cancer_classification.data_modules.nct_crc_he_100k__data_module import NCT_CRC_HE_100K__DataModule
-from cancer_classification.lightning_modules import ModelClass
+from cancer_classification.lightning_modules import model_classes
 
 
 app = typer.Typer()
 
 
 @app.command()
-def train_and_test(model_class: ModelClass, experiment_name: str = None):
+def train_and_test(
+    model_name: str = typer.Option(help="The name of the model to train and test."),
+    experiment_name: str = typer.Option(None, "--experiment-name", help="The name of the experiment to log to.")
+):
     if not experiment_name:
-        experiment_name = model_class.name.split('__')[0].upper()
+        experiment_name = model_name.upper()
 
     try:
         current_git_hash = check_repo_is_in_sync()
@@ -39,8 +42,10 @@ def train_and_test(model_class: ModelClass, experiment_name: str = None):
         max_epochs=50
     )
 
+    model = model_classes[model_name]()
     data_module = NCT_CRC_HE_100K__DataModule(logger=mlflow_logger)
-    trainer.fit(model_class.value, datamodule=data_module)
+
+    trainer.fit(model, datamodule=data_module)
     trainer.test(ckpt_path="best", datamodule=data_module)
 
     commit_latest_run(experiment_name, mlflow_logger.experiment.get_run(mlflow_logger._run_id))

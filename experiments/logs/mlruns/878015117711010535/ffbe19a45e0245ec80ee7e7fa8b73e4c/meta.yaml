@@ -1,0 +1,15 @@
+artifact_uri: s3://rishabhmalviya---cancer-classification/RESNET18/ffbe19a45e0245ec80ee7e7fa8b73e4c/artifacts
+end_time: 1742559246584
+entry_point_name: ''
+experiment_id: '878015117711010535'
+lifecycle_stage: active
+run_id: ffbe19a45e0245ec80ee7e7fa8b73e4c
+run_name: bright-wolf-289
+run_uuid: ffbe19a45e0245ec80ee7e7fa8b73e4c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742559245620
+status: 4
+tags: []
+user_id: rishabh

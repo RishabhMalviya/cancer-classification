@@ -1,17 +1,4 @@
-import os
-
-import torch
 import torch.nn as nn
-import torch.optim as optim
-
-from torchmetrics.classification import (
-    MulticlassAccuracy,
-    MulticlassPrecision,
-    MulticlassRecall,
-    MulticlassF1Score,
-    MulticlassConfusionMatrix
-)
-import lightning.pytorch as pl
 
 from torchvision.models import resnet18
 
@@ -22,7 +9,7 @@ from cancer_classification.lightning_modules.base_cancer_classification_lightnin
 
 class Resnet18__CancerClassification__LightningModule(Base__CancerClassification__LightningModule):
     def __init__(self):
-        super(Base__CancerClassification__LightningModule, self).__init__()
+        super().__init__()
 
         # Define the ResNet model
         self.model = resnet18(pretrained=False)

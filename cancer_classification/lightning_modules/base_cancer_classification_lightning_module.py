@@ -17,13 +17,13 @@ from cancer_classification.lightning_modules.custom_models.single_layer_ff impor
 
 
 class Base__CancerClassification__LightningModule(pl.LightningModule):
-    def __init__(self, num_classes=9, learning_rate=1e-3, model=SingleLayerFF()):
+    def __init__(self, num_classes=9, learning_rate=1e-3):
         super(Base__CancerClassification__LightningModule, self).__init__()
         self.save_hyperparameters()
 
         # Define the ResNet model
-        self.model = model
-        self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
+        self.model = SingleLayerFF()
+        self.num_classes = num_classes
 
         # Define loss function
         self.criterion = nn.CrossEntropyLoss()
@@ -31,14 +31,14 @@ class Base__CancerClassification__LightningModule(pl.LightningModule):
         self.train_loss_outputs = []
 
         # Define metrics
-        self.train_accuracy = MulticlassAccuracy(num_classes=num_classes)
-        self.val_accuracy = MulticlassAccuracy(num_classes=num_classes)
-        self.test_accuracy = MulticlassAccuracy(num_classes=num_classes)
+        self.train_accuracy = MulticlassAccuracy(num_classes=self.num_classes)
+        self.val_accuracy = MulticlassAccuracy(num_classes=self.num_classes)
+        self.test_accuracy = MulticlassAccuracy(num_classes=self.num_classes)
 
-        self.precision = MulticlassPrecision(num_classes=num_classes)
-        self.recall = MulticlassRecall(num_classes=num_classes)
-        self.f1_score = MulticlassF1Score(num_classes=num_classes)
-        self.confusion_matrix = MulticlassConfusionMatrix(num_classes=num_classes)
+        self.precision = MulticlassPrecision(num_classes=self.num_classes)
+        self.recall = MulticlassRecall(num_classes=self.num_classes)
+        self.f1_score = MulticlassF1Score(num_classes=self.num_classes)
+        self.confusion_matrix = MulticlassConfusionMatrix(num_classes=self.num_classes)
 
     def forward(self, x):
         return self.model(x)
