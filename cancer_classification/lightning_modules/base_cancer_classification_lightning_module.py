@@ -13,16 +13,16 @@ from torchmetrics.classification import (
 )
 import lightning.pytorch as pl
 
-from torchvision.models import resnet18
+from cancer_classification.lightning_modules.custom_models.single_layer_ff import SingleLayerFF
 
 
-class ResNet18__LightningModule(pl.LightningModule):
-    def __init__(self, num_classes=9, learning_rate=1e-3):
-        super(ResNet18__LightningModule, self).__init__()
+class Base__CancerClassification__LightningModule(pl.LightningModule):
+    def __init__(self, num_classes=9, learning_rate=1e-3, model=SingleLayerFF()):
+        super(Base__CancerClassification__LightningModule, self).__init__()
         self.save_hyperparameters()
 
         # Define the ResNet model
-        self.model = resnet18(pretrained=False)
+        self.model = model
         self.model.fc = nn.Linear(self.model.fc.in_features, num_classes)
 
         # Define loss function

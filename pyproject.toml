@@ -22,20 +22,22 @@ torchvision = { version = "0.21.0", source = "pytorch-cuda12.4" }
 lightning = "^2.5.0.post0"
 jsonargparse = {extras = ["signatures"], version = "^4.36.0"}
 
+# Data Science Libraries
+matplotlib = "^3.10.1"
+seaborn = "^0.13.2"
+scikit-learn = "^1.6.1"
+
 
 ########################
 # Dev Dependencies
 ########################
-pillow = "^11.1.0"
-matplotlib = "^3.10.1"
-seaborn = "^0.13.2"
-scikit-learn = "^1.6.1"
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
 # Jupyter
 jupyter = { version = "1.0.0" }
+pillow = "^11.1.0"
 
 
 ########################
